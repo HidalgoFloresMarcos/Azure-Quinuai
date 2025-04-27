@@ -1,0 +1,74 @@
+<div class="estadisticas-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="menu-dots">
+      <i class="fas fa-ellipsis-h"></i>
+    </div>
+    <div class="day-title" (click)="toggleCalendar()">
+      <span>DIA {{selectedDay}}</span>
+      <i class="far fa-calendar-alt"></i>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content-card nutritional-card">
+    <h2>Valor nutricional de hoy</h2>
+    
+    <!-- Gráfico de calorías semicircular -->
+    <div class="calories-chart">
+      <div class="semi-circle-chart">
+        <div class="chart-inner">
+          <div class="calories-value">{{totalCalories}}</div>
+          <div class="calories-unit">KCAL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficos circulares de nutrientes -->
+    <div class="nutrients-charts">
+      <div class="chart-item" *ngFor="let value of nutritionalValues">
+        <div class="chart-wrapper">
+          <div class="chart" [style.background]="'conic-gradient(#4CAF50 ' + value.percentage + '%, #E8F5E9 ' + value.percentage + '%)'">
+            <div class="chart-inner">
+              <span class="percentage">{{value.percentage}}%</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-info">
+          <span class="label">{{value.name}}</span>
+          <span class="value">{{value.value}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico de Racha -->
+  <div class="content-card">
+    <div class="chart-section">
+      <h2>Racha</h2>
+      <div class="line-chart racha-chart">
+        <canvas #rachaChart></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico de Ahorro -->
+  <div class="content-card">
+    <div class="chart-section">
+      <h2>Ahorro</h2>
+      <div class="line-chart savings-chart">
+        <div class="chart-legend">
+          <div class="legend-item">
+            <span class="legend-color suggested"></span>
+            <span>Mercado sugerido</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color retail"></span>
+            <span>Mercado retail</span>
+          </div>
+        </div>
+        <canvas #ahorroChart></canvas>
+      </div>
+    </div>
+  </div>
+</div>

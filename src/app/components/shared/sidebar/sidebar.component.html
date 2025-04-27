@@ -1,0 +1,26 @@
+<nav class="sidebar" 
+     [class.expanded]="isExpanded"
+     (mouseenter)="onMouseEnter()"
+     (mouseleave)="onMouseLeave()">
+  <div class="profile">
+    <div class="avatar">
+      <img src="assets/images/profile.png" alt="Profile">
+    </div>
+  </div>
+  <div class="menu">
+    <a *ngFor="let item of menuItems" 
+       [routerLink]="item.route"
+       routerLinkActive="active"
+       class="menu-item"
+       [title]="item.label">
+      <i [class]="item.icon"></i>
+      <span class="menu-label">{{item.label}}</span>
+    </a>
+  </div>
+  <div class="settings">
+    <a class="menu-item" title="Configuración">
+      <i class="fas fa-cog"></i>
+      <span class="menu-label">Configuración</span>
+    </a>
+  </div>
+</nav> 

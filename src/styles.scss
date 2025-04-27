@@ -1,1 +1,91 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Estilos globales */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+}
+
+/* Estilos para Material Components */
+.mat-mdc-card {
+  border-radius: 12px !important;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-stepper-horizontal {
+  background-color: transparent !important;
+}
+
+.mat-step-header:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.mat-button-toggle-group {
+  border: none !important;
+  gap: 1rem;
+}
+
+.mat-button-toggle {
+  border: 2px solid #E0E0E0 !important;
+  border-radius: 8px !important;
+}
+
+.mat-button-toggle-checked {
+  background-color: #E8F5E9 !important;
+  border-color: #2E7D32 !important;
+}
+
+.mat-button-toggle-checked .mat-button-toggle-label-content {
+  color: #2E7D32 !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+button.mat-mdc-raised-button.mat-primary {
+  background-color: #2E7D32 !important;
+}
+
+button.mat-mdc-raised-button.mat-primary:hover {
+  background-color: #1B5E20 !important;
+}
+
+/* Asegurar que los iconos se muestren correctamente */
+.mat-icon {
+  font-family: 'Material Icons' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+/* Estilos para textos */
+.mdc-button__label, .mat-mdc-button .mdc-button__label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.navigation-buttons button {
+  min-width: 120px;
+}

@@ -1,0 +1,44 @@
+<div class="chat-container">
+    <div class="chat-header">
+        <div class="bot-info">
+            <div class="bot-avatar">
+                <img src="assets/images/qaly-avatar.png" alt="Qaly" 
+                     onerror="this.onerror=null; console.error('Error loading avatar image');">
+            </div>
+            <div class="bot-name">Qaly</div>
+        </div>
+        <button mat-icon-button class="chat-menu">
+            <mat-icon class="material-icons-outlined">chat</mat-icon>
+        </button>
+    </div>
+
+    <div class="messages-container" #messagesContainer>
+        <div class="messages">
+            <div *ngFor="let message of messages" 
+                 class="message" 
+                 [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}">
+                <div class="message-content">
+                    {{ message.content }}
+                </div>
+            </div>
+            
+            <div *ngIf="isTyping" class="message bot-message typing">
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input type="text"
+               [(ngModel)]="currentMessage"
+               placeholder="Escribe Aquí...."
+               (keyup.enter)="sendMessage()">
+        <button mat-icon-button (click)="sendMessage()" [disabled]="!currentMessage.trim()">
+            <mat-icon class="material-icons-outlined">send</mat-icon>
+        </button>
+    </div>
+</div> 

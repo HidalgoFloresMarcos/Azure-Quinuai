@@ -1,0 +1,130 @@
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: white;
+}
+
+.logo {
+    margin-bottom: 30px;
+    text-align: center;
+
+    img {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.register-form {
+    width: 100%;
+    max-width: 400px;
+    
+    h2 {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            
+            &::placeholder {
+                color: #999;
+            }
+        }
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 14px;
+        background-color: #2E7D32;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 20px;
+
+        &:hover {
+            background-color: #1B5E20;
+        }
+    }
+
+    .divider {
+        text-align: center;
+        margin: 20px 0;
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        &::before {
+            left: 0;
+        }
+
+        &::after {
+            right: 0;
+        }
+
+        span {
+            background-color: white;
+            padding: 0 10px;
+            color: #666;
+            font-size: 14px;
+        }
+    }
+
+    .social-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        button {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+            img {
+                width: 24px;
+                height: 24px;
+                object-fit: contain;
+            }
+        }
+    }
+}

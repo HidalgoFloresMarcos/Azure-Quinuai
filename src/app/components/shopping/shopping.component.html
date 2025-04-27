@@ -1,0 +1,78 @@
+<div class="shopping-container">
+  <div class="content-card">
+    <div class="shopping-header">
+      <div class="menu-dots">
+        <i class="fas fa-ellipsis-v"></i>
+      </div>
+      <div class="day-number">
+        DIA {{selectedDay}}
+        <i class="far fa-calendar" (click)="toggleCalendar()"></i>
+      </div>
+    </div>
+
+    <div class="shopping-title">
+      <h2>Tus mejores opciones de ahorro</h2>
+    </div>
+
+    <div class="shopping-subtitle">
+      Esta semana necesitarás
+    </div>
+
+    <div class="shopping-list">
+      <div class="shopping-item" *ngFor="let item of shoppingItems">
+        <div class="item-image">
+          <img [src]="item.image" [alt]="item.name">
+        </div>
+        <div class="item-name">{{item.name}}</div>
+        <div class="item-weight">{{item.weight}}</div>
+        <div class="item-price">S/{{item.price.toFixed(2)}}</div>
+        <div class="price-indicator"></div>
+      </div>
+    </div>
+
+    <div class="nearest-store">
+      <h3>Tu opción más cercana</h3>
+      <div class="store-card">
+        <div class="store-icon">
+          <img src="assets/images/store-icon.png" alt="Mercado">
+        </div>
+        <div class="store-info">
+          <div class="store-name">Mercado La Parada</div>
+          <div class="store-address">Av San Eugenio, La Victoria 15034</div>
+          <div class="store-distance">A 15min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Calendario -->
+  <div class="calendar-modal" *ngIf="showCalendar" (click)="closeCalendar($event)">
+    <div class="calendar-container" (click)="$event.stopPropagation()">
+      <div class="calendar-header">
+        <button (click)="previousMonth()">&lt;</button>
+        <select [(ngModel)]="currentMonth" (ngModelChange)="onMonthChange()">
+          <option *ngFor="let month of months; let i = index" [value]="i">{{ month }}</option>
+        </select>
+        <select [(ngModel)]="currentYear" (ngModelChange)="onYearChange()">
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+        <button (click)="nextMonth()">&gt;</button>
+      </div>
+      <div class="weekdays">
+        <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
+      </div>
+      <div class="days">
+        <div 
+          *ngFor="let dayObj of calendarDays" 
+          class="day" 
+          [class.other-month]="dayObj.isOtherMonth"
+          [class.selected]="isSelectedDay(dayObj.date)"
+          [class.inactive]="dayObj.isOtherMonth"
+          (click)="selectDate(dayObj.date)"
+        >
+          {{ dayObj.date.getDate() }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

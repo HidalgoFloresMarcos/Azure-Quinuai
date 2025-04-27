@@ -1,0 +1,89 @@
+<div class="home-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="menu-dots">
+      <i class="fas fa-ellipsis-h"></i>
+    </div>
+    <div class="day-title" (click)="toggleCalendar()">
+      <span>DIA {{selectedDay}}</span>
+      <i class="far fa-calendar-alt"></i>
+    </div>
+  </div>
+
+  <!-- Tabs de comidas -->
+  <div class="meal-tabs">
+    <div class="tab" [class.active]="selectedMeal === 'Almuerzo'" (click)="changeMeal('Almuerzo')">Almuerzo</div>
+    <div class="tab" [class.active]="selectedMeal === 'Desayuno'" (click)="changeMeal('Desayuno')">Desayuno</div>
+    <div class="tab" [class.active]="selectedMeal === 'Cena'" (click)="changeMeal('Cena')">Cena</div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content-card">
+    <div class="meal-title">
+      <h2>Arroz con Pollo</h2>
+      <span class="prep-tag">Preparación</span>
+    </div>
+
+    <div class="ingredients">
+      <h3>Ingredientes</h3>
+      <div class="ingredient-list">
+        <div class="ingredient-item" *ngFor="let ingredient of ingredients">
+          <img [src]="ingredient.image" [alt]="ingredient.name">
+          <span class="name">{{ingredient.name}}</span>
+          <span class="weight">{{ingredient.weight}} gr</span>
+          <span class="price">s/{{ingredient.price.toFixed(2)}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nutritional-value">
+      <h3>Valor nutricional de hoy</h3>
+      <div class="charts">
+        <div class="chart-item" *ngFor="let value of nutritionalValues">
+          <div class="chart-wrapper">
+            <div class="chart" [style.background]="'conic-gradient(#4CAF50 ' + value.percentage + '%, #E8F5E9 ' + value.percentage + '%)'">
+              <div class="chart-inner">
+                <span class="percentage">{{value.percentage}}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="chart-info">
+            <span class="label">{{value.name}}</span>
+            <span class="value">{{value.value}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Calendario -->
+  <div class="calendar-modal" *ngIf="showCalendar" (click)="closeCalendar($event)">
+    <div class="calendar-container" (click)="$event.stopPropagation()">
+      <div class="calendar-header">
+        <button (click)="previousMonth()">&lt;</button>
+        <select [(ngModel)]="currentMonth" (ngModelChange)="onMonthChange()">
+          <option *ngFor="let month of months; let i = index" [value]="i">{{ month }}</option>
+        </select>
+        <select [(ngModel)]="currentYear" (ngModelChange)="onYearChange()">
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+        <button (click)="nextMonth()">&gt;</button>
+      </div>
+      <div class="weekdays">
+        <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
+      </div>
+      <div class="days">
+        <div 
+          *ngFor="let dayObj of calendarDays" 
+          class="day" 
+          [class.other-month]="dayObj.isOtherMonth"
+          [class.selected]="isSelectedDay(dayObj.date)"
+          [class.inactive]="dayObj.isOtherMonth"
+          (click)="selectDate(dayObj.date)"
+        >
+          {{ dayObj.date.getDate() }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

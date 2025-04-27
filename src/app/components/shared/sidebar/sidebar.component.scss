@@ -1,0 +1,160 @@
+.sidebar {
+  width: 70px;
+  height: 100vh;
+  background-color: #4CAF50;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  &.expanded {
+    width: 200px;
+    
+    .menu-label {
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
+.profile {
+  margin-bottom: 30px;
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.menu {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  i {
+    font-size: 20px;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .menu-label {
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+
+  &:hover, &.active {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  &.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: white;
+  }
+}
+
+.settings {
+  width: 100%;
+  margin-top: auto;
+}
+
+// Media queries para responsividad
+@media (min-width: 1024px) {
+  .sidebar {
+    width: 70px;
+
+    &.expanded {
+      width: 200px;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .sidebar {
+    width: 100%;
+    height: 60px;
+    bottom: 0;
+    top: auto;
+    flex-direction: row;
+    padding: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+
+    &.expanded {
+      width: 100%;
+    }
+
+    .profile {
+      display: none;
+    }
+
+    .menu {
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 0 10px;
+    }
+
+    .menu-item {
+      flex-direction: column;
+      padding: 10px;
+      font-size: 12px;
+
+      i {
+        font-size: 18px;
+        margin-bottom: 2px;
+      }
+
+      .menu-label {
+        display: block;
+        opacity: 1;
+        margin: 0;
+        font-size: 10px;
+      }
+
+      &.active::before {
+        width: 100%;
+        height: 4px;
+        top: 0;
+      }
+    }
+
+    .settings {
+      display: none;
+    }
+  }
+} 

@@ -1,0 +1,183 @@
+<div class="survey-container">
+    <mat-stepper linear #stepper>
+        <!-- Paso 1: Género y Fecha de Nacimiento -->
+        <mat-step [completed]="surveyData.gender && surveyData.birthDate">
+            <ng-template matStepLabel>Datos Personales</ng-template>
+            <div class="survey-step">
+                <mat-card>
+                    <mat-card-content>
+                        <h2>Indica tu sexo</h2>
+                        <div class="gender-buttons">
+                            <button 
+                                type="button" 
+                                class="gender-button" 
+                                [class.active]="surveyData.gender === 'masculino'"
+                                (click)="surveyData.gender = 'masculino'">
+                                <mat-icon fontSet="material-icons-outlined">male</mat-icon>
+                                <span>Masculino</span>
+                            </button>
+                            <button 
+                                type="button" 
+                                class="gender-button" 
+                                [class.active]="surveyData.gender === 'femenino'"
+                                (click)="surveyData.gender = 'femenino'">
+                                <mat-icon fontSet="material-icons-outlined">female</mat-icon>
+                                <span>Femenino</span>
+                            </button>
+                        </div>
+
+                        <h2>Fecha de Nacimiento</h2>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Fecha de nacimiento</mat-label>
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="surveyData.birthDate" required>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="!surveyData.birthDate">La fecha de nacimiento es requerida</mat-error>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-step>
+
+        <!-- Paso 2: Altura y Peso -->
+        <mat-step [completed]="surveyData.height.value && surveyData.weight.value">
+            <ng-template matStepLabel>Medidas</ng-template>
+            <div class="survey-step">
+                <mat-card>
+                    <mat-card-content>
+                        <h2>Altura y Peso</h2>
+                        <p class="description">
+                            Es esencial para crear la dieta más acorde a tus necesidades.
+                        </p>
+
+                        <!-- Altura -->
+                        <div class="measurement-control">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Altura</mat-label>
+                                <input matInput type="number" [(ngModel)]="surveyData.height.value" required min="1">
+                                <mat-error *ngIf="!surveyData.height.value">
+                                    La altura es requerida
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="unit-buttons">
+                                <button type="button" class="unit-button" [class.active]="surveyData.height.unit === 'cm'" (click)="surveyData.height.unit = 'cm'">cm</button>
+                                <button type="button" class="unit-button" [class.active]="surveyData.height.unit === 'inch'" (click)="surveyData.height.unit = 'inch'">inch</button>
+                            </div>
+                        </div>
+
+                        <!-- Peso -->
+                        <div class="measurement-control">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Peso</mat-label>
+                                <input matInput type="number" [(ngModel)]="surveyData.weight.value" required min="1">
+                                <mat-error *ngIf="!surveyData.weight.value">
+                                    El peso es requerido
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="unit-buttons">
+                                <button type="button" class="unit-button" [class.active]="surveyData.weight.unit === 'kg'" (click)="surveyData.weight.unit = 'kg'">kg</button>
+                                <button type="button" class="unit-button" [class.active]="surveyData.weight.unit === 'lbs'" (click)="surveyData.weight.unit = 'lbs'">lbs</button>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-step>
+
+        <!-- Paso 3: Alergias y Enfermedades -->
+        <mat-step>
+            <ng-template matStepLabel>Salud</ng-template>
+            <div class="survey-step">
+                <mat-card>
+                    <mat-card-content>
+                        <h2>Alergias y Enfermedades</h2>
+                        
+                        <section class="health-section">
+                            <h3>Alergias</h3>
+                            <div class="checkbox-group">
+                                <mat-checkbox [(ngModel)]="surveyData.allergies.gluten" color="primary">
+                                    Gluten
+                                    <small>Trigo, cebada, centeno</small>
+                                </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.allergies.seafood" color="primary">
+                                    Mariscos
+                                </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.allergies.corn" color="primary">
+                                    Maní
+                                    <small>Maní y sus derivados</small>
+                                </mat-checkbox>
+                            </div>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Otras alergias</mat-label>
+                                <textarea matInput [(ngModel)]="surveyData.allergies.others" 
+                                        placeholder="Escribe aquí las alergias extras que puedas tener"></textarea>
+                            </mat-form-field>
+                        </section>
+
+                        <section class="health-section">
+                            <h3>Enfermedades</h3>
+                            <div class="checkbox-group">
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.diabetes" color="primary">Diabetes</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.cancer" color="primary">Cáncer</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.hypertension" color="primary">Hipertensión</mat-checkbox>
+                            </div>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Otras enfermedades</mat-label>
+                                <textarea matInput [(ngModel)]="surveyData.diseases.others"
+                                        placeholder="Escribe aquí que otras enfermedades padeces"></textarea>
+                            </mat-form-field>
+                        </section>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-step>
+
+        <!-- Paso 4: Ubicación -->
+        <mat-step>
+            <ng-template matStepLabel>Ubicación</ng-template>
+            <div class="survey-step">
+                <mat-card>
+                    <mat-card-content>
+                        <h2>Ubicación</h2>
+                        <p class="description">
+                            Ayúdanos a encontrarte para sugerirte los mejores mercados a tu disposición
+                        </p>
+
+                        <div class="map-container">
+                            <div id="map"></div>
+                            <div class="map-instructions" *ngIf="!selectedLocation">
+                                <mat-icon>location_on</mat-icon>
+                                <span>Haz clic en el mapa para seleccionar la ubicación</span>
+                            </div>
+                        </div>
+
+                        <div class="location-actions">
+                            <button mat-raised-button color="primary" (click)="requestLocation()">
+                                <mat-icon>my_location</mat-icon>
+                                <span>Usar mi ubicación actual</span>
+                            </button>
+                            <button mat-button (click)="skipLocation()">
+                                Saltar por ahora
+                            </button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-step>
+    </mat-stepper>
+
+    <!-- Botones de navegación -->
+    <div class="navigation-buttons">
+        <button mat-button *ngIf="stepper.selectedIndex > 0" (click)="previousStep()">
+            <mat-icon>arrow_back</mat-icon>
+            <span>Anterior</span>
+        </button>
+        <div></div> <!-- Espaciador -->
+        <button mat-raised-button color="primary" (click)="nextStep()" [disabled]="!canProceed()">
+            <span>{{stepper.selectedIndex === 3 ? 'Finalizar' : 'Continuar'}}</span>
+            <mat-icon>arrow_forward</mat-icon>
+        </button>
+    </div>
+</div>
