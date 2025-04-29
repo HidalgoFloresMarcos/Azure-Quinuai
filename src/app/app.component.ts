@@ -13,7 +13,7 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
       </main>
     </div>
   `,
-  styles: [`
+  styles: [`  
     .app-container {
       display: flex;
       min-height: 100vh;
@@ -66,7 +66,7 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Rutas donde no queremos mostrar la barra de navegación
-        this.hideSidebar = ['/register', '/encuesta'].includes(event.url);
+        this.hideSidebar = ['', '/', '/landing', '/register', '/encuesta'].includes(event.url);
       }
     });
   }

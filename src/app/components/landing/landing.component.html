@@ -1,0 +1,492 @@
+<div class="landing-container">
+  <!-- Hero section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <img src="assets/images/logo.png" alt="QuinuAI Logo" class="hero-logo">
+      <h1>QuinuAI</h1>
+      <p class="tagline">Nutrición personalizada e inteligente impulsada por Azure AI</p>
+      <div class="hero-cta">
+        <button mat-raised-button color="primary" class="cta-button" routerLink="/register">
+          Empieza Ahora
+        </button>
+        <button mat-stroked-button class="secondary-button" (click)="scrollToSection('about')">
+          Conoce Más
+        </button>
+      </div>
+      <div class="powered-by">
+        <span>Impulsado por</span>
+        <img src="assets/images/azure-logo.png" alt="Microsoft Azure" class="azure-logo">
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="assets/images/hero-image.png" alt="Nutrición personalizada">
+    </div>
+  </section>
+
+  <!-- About section mejorada visualmente -->
+  <section class="about-section" id="about">
+    <div class="section-header">
+      <h2>Alimentando el Futuro del Perú</h2>
+      <p class="section-subtitle">Tecnología e innovación al servicio de la nutrición peruana</p>
+    </div>
+    
+    <div class="info-cards">
+      <div class="info-card vision-card">
+        <div class="card-icon">
+          <div class="icon-wrapper">
+            <mat-icon>visibility</mat-icon>
+            <div class="icon-rays"></div>
+          </div>
+        </div>
+        <h3>Visión</h3>
+        <div class="card-illustration">
+          <!-- Reemplazando imagen con emojis -->
+          <div style="font-size: 3rem; display: flex; gap: 10px;">
+            <span>🌍</span>
+            <span>🔭</span>
+            <span>🚀</span>
+          </div>
+        </div>
+        <p>Ser el referente latinoamericano en nutrición personalizada, llevando bienestar y accesibilidad alimentaria a todos los peruanos y latinoamericanos a través de la inteligencia artificial.</p>
+        <div class="card-detail">
+          <div class="detail-icon">🌎</div>
+          <div class="detail-text">Impacto global, raíces locales</div>
+        </div>
+      </div>
+      
+      <div class="info-card mission-card">
+        <div class="card-icon">
+          <div class="icon-wrapper">
+            <mat-icon>flag</mat-icon>
+            <div class="icon-rays"></div>
+          </div>
+        </div>
+        <h3>Misión</h3>
+        <div class="card-illustration">
+          <!-- Reemplazando imagen con emojis -->
+          <div style="font-size: 3rem; display: flex; gap: 10px;">
+            <span>🥗</span>
+            <span>💻</span>
+            <span>🧠</span>
+          </div>
+        </div>
+        <p>Democratizar el acceso a planes nutricionales personalizados y de calidad, adaptados a cada presupuesto, mediante el uso de tecnología de punta y conocimiento local.</p>
+        <div class="card-detail">
+          <div class="detail-icon">🎯</div>
+          <div class="detail-text">Nutrición de calidad para todos</div>
+        </div>
+      </div>
+      
+      <div class="info-card origin-card">
+        <div class="card-icon">
+          <div class="icon-wrapper">
+            <mat-icon>public</mat-icon>
+            <div class="icon-rays"></div>
+          </div>
+        </div>
+        <h3>Nuestro Origen</h3>
+        <div class="card-illustration origin-illustration">
+          <div class="peru-map"></div>
+          <div class="quinua-icon">🌱</div>
+          <div class="tech-icon">💻</div>
+          <div class="combination-arrow">➡️</div>
+          <div class="result-icon">🚀</div>
+        </div>
+        <p>Nacimos en Perú, inspirados en la quinua, superalimento andino, símbolo de nutrición y tradición. Combinamos lo mejor de nuestro patrimonio culinario con tecnología de vanguardia.</p>
+        <div class="card-detail">
+          <div class="detail-icon">🇵🇪</div>
+          <div class="detail-text">Orgullo peruano e innovación</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Nueva sección: Por qué lo hicimos -->
+  <section class="why-section">
+    <div class="section-header">
+      <h2>¿Por qué lo hicimos?</h2>
+      <p class="section-subtitle">Enfrentando desafíos reales en la nutrición latinoamericana</p>
+    </div>
+    
+    <div class="why-container">
+      <div class="why-item">
+        <div class="why-number">1</div>
+        <div class="why-content">
+          <div class="why-icon healthcare-icon">
+            <span class="icon-text">93%</span>
+            <div class="icon-graphic">
+              <div class="hospital-icon">🏥</div>
+              <div class="missing-icon">👩‍⚕️❌</div>
+            </div>
+          </div>
+          <h3>Crisis de acceso a nutricionistas</h3>
+          <p>En países latinoamericanos, especialmente en el Perú, <strong>más del 93% de establecimientos de salud públicos carecen de nutricionistas</strong>, y más del 98% no tienen más de 2 profesionales en esta área. La demanda supera ampliamente la oferta disponible.</p>
+          <div class="source-link">
+            <mat-icon>insert_link</mat-icon>
+            <a href="https://www.scielo.cl/scielo.php?script=sci_arttext&pid=S0717-75182024000100015" target="_blank">Fuente: Scielo Chile</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="why-item">
+        <div class="why-number">2</div>
+        <div class="why-content">
+          <div class="why-icon inflation-icon">
+            <div class="icon-graphic">
+              <div class="price-tag">💰</div>
+              <div class="arrow-up">📈</div>
+              <div class="food-icon">🍎</div>
+            </div>
+          </div>
+          <h3>Crisis inflacionaria global</h3>
+          <p>En todo el mundo estamos experimentando una crisis inflacionaria y elevación de precios, lo que hace que acceder a buenos alimentos que aporten correctamente los nutrientes sea cada vez más difícil. <strong>Lograr una alimentación suficiente se vuelve una ardua tarea</strong>, por lo que es necesaria una solución que identifique qué alimentos son los más económicos y generan mayor aporte nutricional en cada momento.</p>
+        </div>
+      </div>
+      
+      <div class="why-item">
+        <div class="why-number">3</div>
+        <div class="why-content">
+          <div class="why-icon disease-icon">
+            <div class="icon-graphic">
+              <div class="heart-icon">❤️</div>
+              <div class="diabetes-icon">🩸</div>
+              <div class="warning-icon">⚠️</div>
+            </div>
+          </div>
+          <h3>Aumento de enfermedades no transmisibles</h3>
+          <p>A nivel mundial existe una alta tendencia hacia la diabetes e hipertensión, muchas veces por los patrones de consumo inadecuados y otras por la falta de recursos económicos. <strong>Estos problemas de salud pública requieren intervenciones personalizadas</strong> que consideren tanto las necesidades médicas como la realidad económica de cada persona.</p>
+          <div class="stats-bar">
+            <div class="stat-item">
+              <div class="stat-value">422M</div>
+              <div class="stat-label">Personas con diabetes en el mundo</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">1.28B</div>
+              <div class="stat-label">Personas con hipertensión</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="why-item">
+        <div class="why-number">4</div>
+        <div class="why-content">
+          <div class="why-icon peru-health-icon">
+            <div class="icon-graphic">
+              <div class="child-icon">👶</div>
+              <div class="anemia-icon">🔴</div>
+              <div class="education-icon">📚</div>
+            </div>
+          </div>
+          <h3>Desnutrición infantil y anemia en Perú</h3>
+          <p>En el Perú, la desnutrición infantil y anemia constituyen un problema grave de salud pública. <strong>12.1% de los niños menores de 5 años sufre desnutrición crónica y 43.5% de niños entre 6 y 35 meses padece anemia</strong>. Muchas veces esto es ocasionado por la desinformación de los padres al no conocer adecuadamente los nutrientes que requiere una persona de determinada edad, peso, estatura y género.</p>
+          <div class="stats-container">
+            <div class="stat-circle">
+              <div class="stat-percentage">43.5%</div>
+              <div class="stat-label">Anemia infantil</div>
+            </div>
+            <div class="stat-circle">
+              <div class="stat-percentage">12.1%</div>
+              <div class="stat-label">Desnutrición crónica</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works section -->
+  <section class="process-section">
+    <div class="section-header">
+      <h2>¿Cómo funciona?</h2>
+      <p class="section-subtitle">Tu nutrición personalizada en simples pasos</p>
+    </div>
+    
+    <div class="process-timeline">
+      <div class="timeline-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Registro y Perfil</h3>
+          <p>Crea tu perfil detallando tus características personales, condiciones médicas y preferencias alimenticias.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Análisis IA</h3>
+          <p>Nuestros algoritmos impulsados por Azure AI analizan tu información para generar recomendaciones nutricionales personalizadas.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Optimización</h3>
+          <p>Identificamos los ingredientes más económicos del mercado que cumplan con tus necesidades nutricionales.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Plan Personalizado</h3>
+          <p>Recibe un plan de alimentación completo, con recetas, lista de compras y recomendaciones adaptadas a tu presupuesto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits section -->
+  <section class="benefits-section">
+    <div class="section-header">
+      <h2>Personalización Integral</h2>
+      <p class="section-subtitle">Tu alimentación tan única como tú</p>
+    </div>
+    
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-visual">
+          <span class="benefit-emoji">💊</span>
+          <mat-icon>medical_services</mat-icon>
+        </div>
+        <h3>Condiciones Médicas</h3>
+        <div class="benefit-tags">
+          <span class="tag">Diabetes</span>
+          <span class="tag">Hipertensión</span>
+          <span class="tag">Celiaquía</span>
+        </div>
+        <p>Adaptamos tus dietas a condiciones específicas como diabetes, hipertensión, celiaquía o alergias alimentarias.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-visual">
+          <span class="benefit-emoji">💪</span>
+          <mat-icon>fitness_center</mat-icon>
+        </div>
+        <h3>Estado Físico</h3>
+        <div class="benefit-progress">
+          <div class="progress-level low">Sedentario</div>
+          <div class="progress-level medium">Moderado</div>
+          <div class="progress-level high">Activo</div>
+        </div>
+        <p>Consideramos tu nivel de actividad, objetivos de peso y requerimientos deportivos específicos.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-visual">
+          <span class="benefit-emoji">😋</span>
+          <mat-icon>thumb_up</mat-icon>
+        </div>
+        <h3>Gustos Personales</h3>
+        <div class="food-icons">
+          <span class="food-icon">🍕</span>
+          <span class="food-icon">🥗</span>
+          <span class="food-icon">🍜</span>
+          <span class="food-icon">🍗</span>
+        </div>
+        <p>Incorporamos tus preferencias y platos favoritos para garantizar una alimentación que disfrutes.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-visual">
+          <span class="benefit-emoji">🚫</span>
+          <mat-icon>thumb_down</mat-icon>
+        </div>
+        <h3>Exclusiones</h3>
+        <div class="exclusion-icons">
+          <span class="exclusion-icon">🥜</span>
+          <span class="exclusion-icon crossed">🍤</span>
+          <span class="exclusion-icon crossed">🥩</span>
+          <span class="exclusion-icon">🥛</span>
+        </div>
+        <p>Evitamos ingredientes que no te gustan o que no deseas consumir por razones personales o éticas.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-visual">
+          <span class="benefit-emoji">💰</span>
+          <mat-icon>payments</mat-icon>
+        </div>
+        <h3>Presupuesto</h3>
+        <div class="budget-slider">
+          <div class="slider-track">
+            <div class="slider-thumb">S/.</div>
+          </div>
+        </div>
+        <p>Optimizamos tu alimentación según tu presupuesto, encontrando alternativas nutritivas a menor costo.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-visual">
+          <span class="benefit-emoji">📍</span>
+          <mat-icon>shopping_cart</mat-icon>
+        </div>
+        <h3>Disponibilidad Local</h3>
+        <div class="local-map">
+          <div class="map-pin"></div>
+          <div class="map-pin"></div>
+          <div class="map-pin active"></div>
+        </div>
+        <p>Recomendamos ingredientes disponibles en tu región y mercados cercanos a tu ubicación.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology section -->
+  <section class="tech-section">
+    <div class="section-header">
+      <h2>Tecnología de Vanguardia</h2>
+      <p class="section-subtitle">Potenciado por Microsoft Azure</p>
+    </div>
+    
+    <div class="tech-showcase">
+      <div class="tech-image">
+        <img src="assets/images/azure-technologies.png" alt="Tecnologías Azure">
+      </div>
+      
+      <div class="tech-details">
+        <div class="tech-feature">
+          <div class="feature-icon azure-ai-icon">
+            <span class="tech-emoji">🧠</span>
+          </div>
+          <div class="feature-content">
+            <h3>Azure OpenAI</h3>
+            <p>Utilizamos modelos avanzados de lenguaje para entender tus necesidades y generar recomendaciones personalizadas.</p>
+          </div>
+        </div>
+        
+        <div class="tech-feature">
+          <div class="feature-icon rag-icon">
+            <span class="tech-emoji">🔍</span>
+          </div>
+          <div class="feature-content">
+            <h3>Retrieval Augmented Generation (RAG)</h3>
+            <p>Nuestros sistemas combinan conocimiento médico verificado con IA generativa para recomendaciones precisas.</p>
+          </div>
+        </div>
+        
+        <div class="tech-feature">
+          <div class="feature-icon algorithm-icon">
+            <span class="tech-emoji">⚙️</span>
+          </div>
+          <div class="feature-content">
+            <h3>Algoritmos de Optimización</h3>
+            <p>Procesamos datos de mercados en tiempo real para ofrecerte las opciones más económicas sin sacrificar valor nutricional.</p>
+          </div>
+        </div>
+        
+        <div class="tech-feature">
+          <div class="feature-icon cloud-icon">
+            <span class="tech-emoji">☁️</span>
+          </div>
+          <div class="feature-content">
+            <h3>Infraestructura Cloud</h3>
+            <p>Toda nuestra plataforma opera en la nube de Microsoft Azure, garantizando escalabilidad, seguridad y disponibilidad.</p>
+          </div>
+        </div>
+        
+        <div class="tech-feature">
+          <div class="feature-icon scraping-icon">
+            <span class="tech-emoji">📊</span>
+          </div>
+          <div class="feature-content">
+            <h3>Web Scraping en Tiempo Real</h3>
+            <p>Monitoreamos continuamente los precios de alimentos en los principales mercados y supermercados para garantizar que siempre recibas las mejores opciones económicas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sustainability section -->
+  <section class="ods-section">
+    <div class="section-header">
+      <h2>Compromiso con los ODS</h2>
+      <p class="section-subtitle">Contribuyendo a un mundo más sostenible</p>
+    </div>
+    
+    <div class="ods-grid">
+      <div class="ods-card">
+        <img src="assets/images/ods-2.png" alt="ODS 2" class="ods-icon">
+        <h3>Hambre Cero</h3>
+        <p>Promovemos el acceso a alimentación nutritiva y adecuada para todos, independientemente de su presupuesto.</p>
+      </div>
+      
+      <div class="ods-card">
+        <img src="assets/images/ods-3.png" alt="ODS 3" class="ods-icon">
+        <h3>Salud y Bienestar</h3>
+        <p>Fomentamos hábitos alimenticios saludables para prevenir enfermedades y mejorar la calidad de vida.</p>
+      </div>
+      
+      <div class="ods-card">
+        <img src="assets/images/ods-10.png" alt="ODS 10" class="ods-icon">
+        <h3>Reducción de Desigualdades</h3>
+        <p>Democratizamos el acceso a asesoría nutricional de calidad, antes disponible solo para quienes podían pagarla.</p>
+      </div>
+      
+      <div class="ods-card">
+        <img src="assets/images/ods-12.png" alt="ODS 12" class="ods-icon">
+        <h3>Consumo Responsable</h3>
+        <p>Incentivamos el consumo de alimentos locales y de temporada, reduciendo la huella de carbono.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Empieza tu viaje hacia una alimentación óptima</h2>
+      <p>Descubre cómo la nutrición personalizada puede transformar tu bienestar y optimizar tu presupuesto</p>
+      <button mat-raised-button color="primary" class="cta-button-large" routerLink="/register">
+        Crea tu plan ahora
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="assets/images/logo.png" alt="QuinuAI">
+        <p>© 2024 QuinuAI - Todos los derechos reservados</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="link-group">
+          <h4>QuinuAI</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Nuestro Equipo</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+        
+        <div class="link-group">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Términos de Uso</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+        
+        <div class="link-group">
+          <h4>Síguenos</h4>
+          <div class="social-icons">
+            <a href="#"><mat-icon>facebook</mat-icon></a>
+            <a href="#"><mat-icon>twitter</mat-icon></a>
+            <a href="#"><mat-icon>instagram</mat-icon></a>
+            <a href="#"><mat-icon>linkedin</mat-icon></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hackathon-badge">
+        <p>Desarrollado para el Hackathon de Microsoft Azure 2024</p>
+        <img src="assets/images/hackathon-badge.png" alt="Hackathon Azure">
+      </div>
+    </div>
+  </footer>
+</div>

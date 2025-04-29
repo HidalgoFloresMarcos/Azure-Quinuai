@@ -106,6 +106,9 @@
                                     Maní
                                     <small>Maní y sus derivados</small>
                                 </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.allergies.lactose" color="primary">
+                                    Lácteos
+                                </mat-checkbox>
                             </div>
 
                             <mat-form-field appearance="outline">
@@ -115,12 +118,48 @@
                             </mat-form-field>
                         </section>
 
+                        <!-- Nueva sección para disgustos alimenticios -->
+                        <section class="health-section">
+                            <h3>Disgustos alimenticios</h3>
+                            <p>Indica alimentos que no te gustan o prefieres evitar</p>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Alimentos</mat-label>
+                                <mat-chip-grid #disgustoList>
+                                    <mat-chip-row *ngFor="let disgusto of surveyData.dislikes; let i = index" 
+                                             (removed)="surveyData.dislikes.splice(i, 1)">
+                                        {{disgusto}}
+                                        <button matChipRemove>
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip-row>
+                                </mat-chip-grid>
+                                <input placeholder="Añadir alimento..."
+                                       [matChipInputFor]="disgustoList"
+                                       (matChipInputTokenEnd)="addDisgusto($event)">
+                            </mat-form-field>
+                        </section>
+
                         <section class="health-section">
                             <h3>Enfermedades</h3>
                             <div class="checkbox-group">
-                                <mat-checkbox [(ngModel)]="surveyData.diseases.diabetes" color="primary">Diabetes</mat-checkbox>
-                                <mat-checkbox [(ngModel)]="surveyData.diseases.cancer" color="primary">Cáncer</mat-checkbox>
-                                <mat-checkbox [(ngModel)]="surveyData.diseases.hypertension" color="primary">Hipertensión</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.diabetesType1" color="primary">
+                                    Diabetes Tipo 1
+                                </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.diabetesType2" color="primary">
+                                    Diabetes Tipo 2
+                                </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.anemia" color="primary">
+                                    Anemia
+                                </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.hypertension" color="primary">
+                                    Hipertensión
+                                </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.celiac" color="primary">
+                                    Enfermedad Celíaca
+                                </mat-checkbox>
+                                <mat-checkbox [(ngModel)]="surveyData.diseases.lactoseIntolerance" color="primary">
+                                    Intolerancia a la lactosa
+                                </mat-checkbox>
                             </div>
 
                             <mat-form-field appearance="outline">
@@ -145,6 +184,23 @@
                             Ayúdanos a encontrarte para sugerirte los mejores mercados a tu disposición
                         </p>
 
+                        <div class="location-fields">
+                            <mat-form-field appearance="outline">
+                                <mat-label>País</mat-label>
+                                <input matInput [(ngModel)]="surveyData.location.country" placeholder="Perú">
+                            </mat-form-field>
+                            
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ciudad</mat-label>
+                                <input matInput [(ngModel)]="surveyData.location.city" placeholder="Lima">
+                            </mat-form-field>
+                            
+                            <mat-form-field appearance="outline">
+                                <mat-label>Región/Distrito</mat-label>
+                                <input matInput [(ngModel)]="surveyData.location.region" placeholder="San Juan de Lurigancho">
+                            </mat-form-field>
+                        </div>
+
                         <div class="map-container">
                             <div id="map"></div>
                             <div class="map-instructions" *ngIf="!selectedLocation">
@@ -166,6 +222,56 @@
                 </mat-card>
             </div>
         </mat-step>
+
+        <!-- Paso 5: Actividad Física y Objetivos -->
+        <mat-step>
+            <ng-template matStepLabel>Objetivos</ng-template>
+            <div class="survey-step">
+                <mat-card>
+                    <mat-card-content>
+                        <h2>Actividad y Objetivos</h2>
+                        
+                        <section class="activity-section">
+                            <h3>Nivel de actividad física</h3>
+                            
+                            <mat-radio-group [(ngModel)]="surveyData.physicalActivity">
+                                <div class="radio-option">
+                                    <mat-radio-button value="baja">Baja</mat-radio-button>
+                                    <small>Poco o ningún ejercicio</small>
+                                </div>
+                                <div class="radio-option">
+                                    <mat-radio-button value="moderada">Moderada</mat-radio-button>
+                                    <small>Ejercicio 3-5 veces por semana</small>
+                                </div>
+                                <div class="radio-option">
+                                    <mat-radio-button value="alta">Alta</mat-radio-button>
+                                    <small>Ejercicio diario intenso</small>
+                                </div>
+                            </mat-radio-group>
+                        </section>
+                        
+                        <section class="goals-section">
+                            <h3>Objetivo principal</h3>
+                            
+                            <mat-radio-group [(ngModel)]="surveyData.goal">
+                                <div class="radio-option">
+                                    <mat-radio-button value="bajar de peso">Bajar de peso</mat-radio-button>
+                                </div>
+                                <div class="radio-option">
+                                    <mat-radio-button value="mantener peso">Mantener peso</mat-radio-button>
+                                </div>
+                                <div class="radio-option">
+                                    <mat-radio-button value="aumentar peso">Aumentar peso</mat-radio-button>
+                                </div>
+                                <div class="radio-option">
+                                    <mat-radio-button value="mejorar salud">Mejorar salud general</mat-radio-button>
+                                </div>
+                            </mat-radio-group>
+                        </section>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-step>
     </mat-stepper>
 
     <!-- Botones de navegación -->
@@ -175,9 +281,13 @@
             <span>Anterior</span>
         </button>
         <div></div> <!-- Espaciador -->
-        <button mat-raised-button color="primary" (click)="nextStep()" [disabled]="!canProceed()">
-            <span>{{stepper.selectedIndex === 3 ? 'Finalizar' : 'Continuar'}}</span>
+        <button mat-raised-button color="primary" (click)="nextStep()" *ngIf="stepper.selectedIndex < stepper.steps.length - 1">
+            <span>Continuar</span>
             <mat-icon>arrow_forward</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="finishSurvey()" *ngIf="stepper.selectedIndex === stepper.steps.length - 1">
+            <span>Finalizar</span>
+            <mat-icon>check</mat-icon>
         </button>
     </div>
 </div>

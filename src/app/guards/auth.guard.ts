@@ -1,16 +1,23 @@
-import { inject } from '@angular/core';
-import { Router, type CanActivateFn } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  
-  // Aquí puedes agregar tu lógica para verificar si el usuario está autenticado
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-  
-  if (isAuthenticated) {
-    return true;
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
+
+  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    // Verificar si el usuario está autenticado
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    
+    if (isAuthenticated) {
+      return true;
+    }
+    
+    // Si no está autenticado, redirigir al registro
+    this.router.navigate(['/register']);
+    return false;
   }
-  
-  // Si no está autenticado, redirige a register
-  return router.parseUrl('/register');
-}; 
+}

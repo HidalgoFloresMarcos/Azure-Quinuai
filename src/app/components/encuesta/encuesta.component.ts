@@ -14,6 +14,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-encuesta',
@@ -30,7 +34,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatNativeDateModule,
     MatButtonToggleModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   templateUrl: './encuesta.component.html',
   styleUrl: './encuesta.component.scss'
@@ -50,15 +57,27 @@ export class EncuestaComponent implements OnInit, AfterViewInit {
       gluten: false,
       seafood: false,
       corn: false,
+      lactose: false, // Añadido lácteos
       others: ''
     },
+    dislikes: [], // Para disgustos alimenticios
     diseases: {
-      diabetes: false,
-      cancer: false,
+      diabetesType1: false,
+      diabetesType2: false,
+      anemia: false,
       hypertension: false,
+      celiac: false,
+      lactoseIntolerance: false,
       others: ''
     },
-    location: false
+    location: {
+      enabled: false,
+      country: 'Perú',
+      city: '',
+      region: ''
+    },
+    physicalActivity: null,
+    goal: null
   };
 
   constructor(private router: Router) {}
@@ -85,6 +104,18 @@ export class EncuestaComponent implements OnInit, AfterViewInit {
         this.initMap();
       }
     });
+  }
+
+  // Método para añadir disgustos alimenticios
+  addDisgusto(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    if (value) {
+      this.surveyData.dislikes.push(value);
+    }
+    // Clear the input value
+    if (event.chipInput) {
+      event.chipInput.clear();
+    }
   }
 
   canProceed(): boolean {
@@ -176,7 +207,7 @@ export class EncuestaComponent implements OnInit, AfterViewInit {
             position.coords.longitude
           );
           this.selectedLocation = location;
-          this.surveyData.location = true;
+          this.surveyData.location.enabled = true; // Actualizado para usar el objeto location
           
           if (this.map) {
             this.updateMarker(location);
@@ -186,19 +217,73 @@ export class EncuestaComponent implements OnInit, AfterViewInit {
         },
         (error) => {
           console.error('Error getting location:', error);
-          this.surveyData.location = false;
+          this.surveyData.location.enabled = false; // Actualizado para usar el objeto location
         }
       );
     }
   }
 
   skipLocation() {
-    this.surveyData.location = false;
+    this.surveyData.location.enabled = false; // Actualizado para usar el objeto location
     this.nextStep();
   }
 
   finishSurvey() {
-    console.log('Datos de la encuesta:', this.surveyData);
-    this.router.navigate(['/bot']);
+    // Convertir los datos a la estructura requerida
+    const userData = {
+      id: "1",
+      nombre: "Usuario", // Podría obtenerse del registro previo
+      email: localStorage.getItem('userEmail') || "usuario@example.com",
+      fechaNacimiento: this.surveyData.birthDate || new Date().toISOString().split('T')[0],
+      sexo: this.surveyData.gender || "femenino",
+      pesoKg: this.surveyData.weight.value || 70,
+      alturaCm: this.surveyData.height.value || 160,
+      alergias: this.convertirAlergias(),
+      disgustos: this.surveyData.dislikes || [],
+      condicionesMedicas: this.convertirCondicionesMedicas(),
+      ubicacion: {
+        pais: this.surveyData.location.country || "Peru",
+        ciudad: this.surveyData.location.city || "Lima",
+        region: this.surveyData.location.region || "Lima"
+      },
+      actividadFisica: this.surveyData.physicalActivity || "baja",
+      objetivo: this.surveyData.goal || "mejorar salud"
+    };
+    
+    // Guardar datos y marcar como autenticado
+    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('isAuthenticated', 'true');
+    
+    // Redireccionar al home
+    this.router.navigate(['/home']);
+  }
+
+  // Funciones auxiliares para convertir datos
+  private convertirAlergias(): string[] {
+    const alergias: string[] = [];
+    if (this.surveyData.allergies.gluten) alergias.push('gluten');
+    if (this.surveyData.allergies.seafood) alergias.push('mariscos');
+    if (this.surveyData.allergies.corn) alergias.push('maíz');
+    if (this.surveyData.allergies.lactose) alergias.push('lácteos');
+    if (this.surveyData.allergies.others) {
+      const otras = this.surveyData.allergies.others.split(',').map(a => a.trim()).filter(a => a);
+      alergias.push(...otras);
+    }
+    return alergias;
+  }
+
+  private convertirCondicionesMedicas(): string[] {
+    const condiciones: string[] = [];
+    if (this.surveyData.diseases.diabetesType1) condiciones.push('diabetes melitus tipo 1');
+    if (this.surveyData.diseases.diabetesType2) condiciones.push('diabetes tipo 2');
+    if (this.surveyData.diseases.anemia) condiciones.push('anemia');
+    if (this.surveyData.diseases.hypertension) condiciones.push('hipertensión');
+    if (this.surveyData.diseases.celiac) condiciones.push('enfermedad celíaca');
+    if (this.surveyData.diseases.lactoseIntolerance) condiciones.push('intolerancia a la lactosa');
+    if (this.surveyData.diseases.others) {
+      const otras = this.surveyData.diseases.others.split(',').map(c => c.trim()).filter(c => c);
+      condiciones.push(...otras);
+    }
+    return condiciones;
   }
 }

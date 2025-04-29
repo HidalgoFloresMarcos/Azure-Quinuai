@@ -1,130 +1,1063 @@
+@use "sass:color";
+
+// Variables
+$primary-color: #2E7D32;
+$primary-light: #C8E6C9;
+$primary-dark: #1B5E20;
+$secondary-color: #FF9800;
+$secondary-light: #FFE0B2;
+$accent-color: #42A5F5;
+$accent-light: #E3F2FD;
+$background-color: #F5F5F5;
+$card-background: white;
+$border-radius: 8px;
+$box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+// Estilos generales
 .register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafa 0%, #e9f3e9 100%);
+  padding: 20px;
+}
+
+.register-card {
+  background-color: $card-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .logo {
-    margin-bottom: 30px;
-    text-align: center;
-
-    img {
-        width: 180px;
-        height: 180px;
-        object-fit: contain;
+  text-align: center;
+  margin-bottom: 20px;
+  
+  img {
+    max-width: 150px;
+    height: auto;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
     }
+  }
 }
 
-.register-form {
-    width: 100%;
-    max-width: 400px;
+// Barra de progreso
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0;
+  
+  .progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
     
-    h2 {
-        text-align: center;
-        color: #333;
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #BDBDBD;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 16px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .step-label {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #757575;
+      transition: all 0.3s ease;
+      text-align: center;
+      max-width: 100px;
+    }
+    
+    &.active {
+      .step-number {
+        background-color: $primary-color;
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba($primary-color, 0.3);
+      }
+      
+      .step-label {
+        color: $primary-color;
+        font-weight: 500;
+        transform: scale(1.05);
+      }
+    }
+    
+    &.completed {
+      .step-number {
+        background-color: $primary-color;
+        
+        &:before {
+          content: "✓";
+          position: absolute;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  
+  .progress-connector {
+    flex: 1;
+    height: 3px;
+    background-color: #BDBDBD;
+    margin: 0 10px;
+    transition: background-color 0.5s ease, height 0.3s ease;
+    position: relative;
+    top: -10px;
+    
+    &.active {
+      background-color: $primary-color;
+      height: 4px;
+    }
+  }
+}
+
+// Estilos del formulario
+.register-form {
+  margin-top: 20px;
+  
+  h2 {
+    font-size: 24px;
+    color: $primary-color;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, $primary-color, $secondary-color);
+      border-radius: 2px;
+    }
+  }
+  
+  h3 {
+    font-size: 18px;
+    color: #424242;
+    margin: 25px 0 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    
+    mat-icon {
+      margin-right: 8px;
+      color: $primary-color;
+    }
+  }
+}
+
+// Campos del formulario
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+// Form rows
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+// Selección de tipo de registro
+.registration-type {
+  margin: 30px 0;
+  
+  h3 {
+    text-align: center;
+  }
+}
+
+.type-selection {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  
+  .type-option {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid transparent;
+    
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba($primary-light, 0.3), rgba($secondary-light, 0.3));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+    
+    mat-icon {
+      font-size: 48px;
+      height: 48px;
+      width: 48px;
+      margin-bottom: 16px;
+      color: #757575;
+      position: relative;
+      z-index: 1;
+    }
+    
+    span {
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    p {
+      color: #757575;
+      margin: 0;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      
+      &:before {
+        opacity: 1;
+      }
+    }
+    
+    &.selected {
+      background-color: $primary-light;
+      border: 2px solid $primary-color;
+      box-shadow: 0 6px 15px rgba($primary-color, 0.2);
+      
+      &:before {
+        opacity: 1;
+        background: linear-gradient(45deg, rgba($primary-light, 0.5), rgba($primary-light, 0.3));
+      }
+      
+      mat-icon {
+        color: $primary-dark;
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+      
+      span {
+        color: $primary-dark;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// Paneles de expansión
+mat-expansion-panel {
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12) !important;
+  }
+  
+  &.mat-expanded {
+    margin-bottom: 24px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
+  }
+  
+  mat-expansion-panel-header {
+    padding: 20px;
+    height: auto !important;
+    min-height: 64px !important;
+    
+    mat-panel-title {
+      align-items: center;
+      color: #424242;
+      font-weight: 500;
+      
+      mat-icon {
+        margin-right: 12px;
+        color: $primary-color;
         font-size: 24px;
-        margin-bottom: 30px;
+        height: 24px;
+        width: 24px;
+      }
     }
-
-    .form-group {
-        margin-bottom: 20px;
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            
-            &::placeholder {
-                color: #999;
-            }
-        }
+    
+    mat-panel-description {
+      color: #757575;
+      font-size: 14px;
     }
+  }
+  
+  .mat-expansion-panel-body {
+    padding: 16px 24px 24px;
+  }
+}
 
-    .login-btn {
-        width: 100%;
-        padding: 14px;
-        background-color: #2E7D32;
+// Chips container (tags)
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  
+  .chip {
+    background: linear-gradient(135deg, $primary-light, color.adjust($primary-light, $lightness: 5%));
+    color: $primary-dark;
+    padding: 8px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    }
+    
+    mat-icon {
+      margin-right: 8px;
+      font-size: 18px;
+      color: $primary-color;
+    }
+    
+    &:hover {
+      background-color: #EEEEEE;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    &.selected {
+      background: linear-gradient(135deg, $primary-color, color.adjust($primary-color, $lightness: 10%));
+      color: white;
+      box-shadow: 0 4px 8px rgba($primary-color, 0.3);
+      
+      mat-icon {
         color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-bottom: 20px;
-
-        &:hover {
-            background-color: #1B5E20;
-        }
+      }
     }
+  }
+}
 
-    .divider {
+// Tags selector (para selección rápida)
+.tags-selector {
+  margin-bottom: 20px;
+  
+  .common-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+    
+    .tag-pill {
+      background: linear-gradient(135deg, $primary-light, color.adjust($primary-light, $lightness: 8%));
+      color: $primary-dark;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+      
+      &:before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+        transform: scale(0);
+        transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      
+      &:hover {
+        background: linear-gradient(135deg, $primary-light, $primary-color);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 10px rgba($primary-color, 0.3);
+        
+        &:before {
+          transform: scale(1);
+        }
+      }
+      
+      &:active {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Health section
+.health-section {
+  margin-top: 30px;
+  padding-top: 12px;
+  position: relative;
+  
+  &:not(:first-child) {
+    border-top: 1px dashed rgba(0,0,0,0.1);
+  }
+  
+  h3 {
+    margin-bottom: 20px;
+    
+    &:before {
+      content: "•";
+      color: $primary-color;
+      margin-right: 8px;
+    }
+  }
+}
+
+// Estilos para las condiciones médicas
+.health-conditions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.condition-card {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+  }
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+  
+  &.selected {
+    background-color: $primary-light;
+    
+    &:before {
+      background-color: $primary-color;
+    }
+    
+    .condition-name {
+      color: $primary-dark;
+      font-weight: 500;
+    }
+    
+    .condition-icon {
+      transform: scale(1.1);
+    }
+  }
+  
+  .condition-icon {
+    font-size: 24px;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+  }
+  
+  .condition-name {
+    flex: 1;
+    font-size: 16px;
+  }
+  
+  .condition-checkbox {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    mat-icon {
+      color: $primary-color;
+      font-size: 22px;
+      height: 22px;
+      width: 22px;
+    }
+  }
+}
+
+.section-description {
+  margin-bottom: 20px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  
+  .info-icon {
+    margin-left: 8px;
+    color: $accent-color;
+    font-size: 18px;
+    cursor: help;
+  }
+}
+
+// Secciones para el nuevo paso de Preferencias y Presupuesto
+.budget-sliders {
+  margin-bottom: 30px;
+
+  .slider-container {
+    margin-bottom: 25px;
+    
+    label {
+      display: block;
+      margin-bottom: 12px;
+      color: #424242;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    
+    .slider-visual {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      
+      .slider-icon {
+        font-size: 24px;
+        width: 24px;
         text-align: center;
-        margin: 20px 0;
-        position: relative;
+      }
 
-        &::before,
-        &::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background-color: #ddd;
-        }
+      .input-number-container {
+        min-width: 80px;
+        width: 80px;
+      }
 
-        &::before {
-            left: 0;
-        }
-
-        &::after {
-            right: 0;
-        }
-
-        span {
-            background-color: white;
-            padding: 0 10px;
-            color: #666;
-            font-size: 14px;
-        }
+      .budget-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        text-align: right;
+      }
+    }
+    
+    .slider-value {
+      text-align: right;
+      color: $primary-color;
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 8px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
-    .social-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-
-        button {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            background-color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-
-            &:hover {
-                transform: scale(1.05);
-            }
-
-            img {
-                width: 24px;
-                height: 24px;
-                object-fit: contain;
-            }
-        }
+    mat-slider {
+      flex: 1;
     }
+  }
+}
+
+// Selección de comidas
+.meals-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+  
+  .meal-chip {
+    background-color: #E0E0E0;
+    padding: 10px 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    mat-icon {
+      margin-right: 8px;
+      font-size: 18px;
+      color: $primary-color;
+    }
+    
+    &:hover {
+      background-color: #EEEEEE;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    &.selected {
+      background: linear-gradient(135deg, $primary-color, color.adjust($primary-color, $lightness: 10%));
+      color: white;
+      box-shadow: 0 4px 8px rgba($primary-color, 0.3);
+      
+      mat-icon {
+        color: white;
+      }
+    }
+  }
+}
+
+// Separadores
+mat-divider {
+  margin: 40px 0;
+  border-top-width: 2px;
+  border-top-style: dashed;
+  
+  &:after {
+    content: "♦";
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 0 15px;
+    color: $primary-color;
+  }
+}
+
+// Checkbox options
+.checkbox-option {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: #EEEEEE;
+  }
+  
+  mat-checkbox {
+    font-size: 16px;
+  }
+}
+
+// Location inputs (adjusted for icons)
+.location-inputs {
+  margin-top: 20px;
+  
+  mat-form-field {
+    margin-bottom: 16px;
+  }
+  
+  mat-icon {
+    color: $primary-color;
+  }
+}
+
+// Activity and Goal selections
+.activity-options, .goals-options {
+  margin-bottom: 40px;
+}
+
+.activity-buttons, .goals-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+  
+  .activity-button, .goal-button {
+    flex: 1;
+    min-width: 140px;
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba($primary-light, 0.5), rgba(white, 0.5));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    mat-icon {
+      font-size: 36px;
+      height: 36px;
+      width: 36px;
+      margin-bottom: 12px;
+      color: #757575;
+      position: relative;
+      z-index: 1;
+    }
+    
+    span {
+      font-weight: 500;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    small {
+      color: #757575;
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    &:hover {
+      border-color: $primary-light;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      
+      &:before {
+        opacity: 0.5;
+      }
+      
+      mat-icon {
+        color: $primary-color;
+      }
+    }
+    
+    &.selected {
+      background-color: $primary-light;
+      border-color: $primary-color;
+      box-shadow: 0 6px 15px rgba($primary-color, 0.25);
+      
+      &:before {
+        opacity: 1;
+      }
+      
+      mat-icon {
+        color: $primary-color;
+      }
+      
+      &:after {
+        content: "✓";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        background-color: $primary-color;
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+    }
+  }
+  
+  .goal-button {
+    flex: 0 1 calc(50% - 8px);
+  }
+}
+
+// Registro familiar
+.family-registration {
+  .instruction {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #757575;
+    background-color: #FFF3E0;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    border-left: 4px solid $secondary-color;
+  }
+}
+
+.family-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.family-sidebar {
+  width: 220px;
+  
+  .add-member-btn {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    font-size: 15px;
+    box-shadow: 0 4px 8px rgba($primary-color, 0.2);
+    
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+  
+  .members-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: #BDBDBD;
+      border-radius: 3px;
+    }
+    
+    .member-card {
+      display: flex;
+      align-items: center;
+      padding: 14px 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      background-color: #F5F5F5;
+      
+      mat-icon {
+        margin-right: 10px;
+        color: #757575;
+      }
+      
+      span {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .remove-btn {
+        margin-left: auto;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+        
+        &:hover {
+          opacity: 1;
+          color: #F44336;
+        }
+      }
+      
+      &:hover {
+        background-color: #EEEEEE;
+        transform: translateX(5px);
+      }
+      
+      &.active {
+        background-color: $primary-light;
+        border-left: 4px solid $primary-color;
+        
+        mat-icon {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+.member-form {
+  flex: 1;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+// Botones de navegación
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #EEEEEE;
+  
+  .spacer {
+    flex-grow: 1;
+  }
+  
+  button {
+    min-width: 140px;
+    padding: 12px 24px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    
+    mat-icon {
+      margin: 0 6px;
+    }
+    
+    &[color="primary"] {
+      box-shadow: 0 4px 10px rgba($primary-color, 0.3);
+      
+      &:hover {
+        box-shadow: 0 6px 14px rgba($primary-color, 0.4);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .type-selection {
+    flex-direction: column;
+  }
+  
+  .family-container {
+    flex-direction: column;
+  }
+  
+  .family-sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .activity-buttons, .goals-buttons {
+    .activity-button, .goal-button {
+      min-width: 100%;
+      flex: 0 0 100%;
+    }
+  }
+  
+  .navigation-buttons {
+    flex-direction: column-reverse;
+    gap: 16px;
+    
+    button {
+      width: 100%;
+    }
+  }
+  
+  mat-expansion-panel-header {
+    padding: 16px !important;
+  }
+}
+
+// Estilos para la sección de presupuesto mejorada
+.budget-sliders {
+  margin-bottom: 30px;
+
+  .slider-container {
+    margin-bottom: 25px;
+    
+    label {
+      display: block;
+      margin-bottom: 12px;
+      color: #424242;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    
+    .slider-visual {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      
+      .slider-icon {
+        font-size: 24px;
+        width: 24px;
+        text-align: center;
+      }
+
+      .input-number-container {
+        min-width: 80px;
+        width: 80px;
+      }
+
+      .budget-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        text-align: right;
+      }
+    }
+    
+    .slider-value {
+      text-align: right;
+      color: $primary-color;
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 8px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    mat-slider {
+      flex: 1;
+    }
+  }
 }
